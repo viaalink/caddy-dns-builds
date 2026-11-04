@@ -13,9 +13,12 @@ paths carry the identical plugin set, and are consumed directly by
 `binary-installer.ts`'s `caddy` entry for platforms this repo has a build
 for.
 
-Bundled plugins: `caddy-dns/{porkbun,cloudflare,route53,digitalocean,godaddy}`,
+Bundled plugins: `mholt/caddy-l4` (layer4, for `inspect: true` on TCP services),
+`caddy-dns/{porkbun,cloudflare,route53,digitalocean,godaddy}`, `greenpau/caddy-security`,
 `caddyserver/jsonc-adapter`. See each release's notes for the exact Caddy
 version, build provenance, and rebuild instructions.
 
-Currently published: `linux/amd64`. Other platforms fall back to vanilla
-Caddy until built here.
+Currently published (since `v2.11.7-l4dns1`): `linux/{amd64,arm64}`,
+`darwin/{amd64,arm64}`, `windows/{amd64,arm64}`. Rebuild with `just caddy-build`
+(then `just caddy-build-verify` and `just caddy-build-smoke`) in the `.asd` source;
+the build is reproducible, so a rebuild must match the release's `SHA256SUMS.txt`.
